@@ -1,5 +1,7 @@
 # Raspberry Pi Weather Station with MQTT
 
+*Note* This repo is an amalgamation of both https://projects.raspberrypi.org/en/projects/oracle-raspberrypi-weather-station/0 and https://github.com/theoracle09/Weather-Station, since the latter didn't provide the hardware support I needed for the original Oracle Weather station hardware. Huge thanks go to both projects for making this possible. As a result, this won't be particularly useful unless you're using the same Oracle Based Hardware. It's also held together with selotape, so you use it at your own risk.
+
 ## Table of Contents
 
   * [About](#about)
