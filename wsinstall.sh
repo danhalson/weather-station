@@ -66,52 +66,6 @@ echo 'Installing required packages'
 ## Install com tools
 sudo apt-get install i2c-tools python-smbus telnet -y
 
-## Set password for mysql-server
-echo 'Please choose a password for your database'
-read -s -p "Password: " PASS1 < /dev/tty
-echo
-read -s -p "Password (again): " PASS2 < /dev/tty
-
-# check if passwords match and if not ask again
-while [ "$PASS1" != "$PASS2" ];
-do
-    echo
-    echo "Please try again"
-    read -s -p "Password: " PASS1 < /dev/tty
-    echo
-    read -s -p "Password (again): " PASS2 < /dev/tty
-done
-
-echo 'Installing local database'
-sudo apt-get install -y mariadb-server mariadb-client libmariadbclient-dev
-# sudo apt-get install -y apache2 php5 libapache2-mod-php5 php-mysql
-sudo pip3 install mysqlclient
-
-
-## Create a database and weather table
-echo 'Creating Database'
-sudo mysql  <<EOT
-create user pi IDENTIFIED by '$PASS1';
-grant all privileges on *.* to 'pi' with grant option;
-CREATE DATABASE weather;
-USE weather;
-CREATE TABLE WEATHER_MEASUREMENT(
-ID BIGINT NOT NULL AUTO_INCREMENT,
-REMOTE_ID BIGINT,
-AMBIENT_TEMPERATURE DECIMAL(6,2) NOT NULL,
-GROUND_TEMPERATURE DECIMAL(6,2) NOT NULL,
-AIR_QUALITY DECIMAL(6,2) NOT NULL,
-AIR_PRESSURE DECIMAL(6,2) NOT NULL,
-HUMIDITY DECIMAL(6,2) NOT NULL,
-WIND_DIRECTION DECIMAL(6,2) NULL,
-WIND_SPEED DECIMAL(6,2) NOT NULL,
-WIND_GUST_SPEED DECIMAL(6,2) NOT NULL,
-RAINFALL DECIMAL (6,2) NOT NULL,
-CREATED TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-PRIMARY KEY ( ID )
-);
-EOT
-
 ## Get the weather station python files
 cd ~
 git clone https://github.com/raspberrypi/weather-station.git
@@ -122,34 +76,8 @@ echo 'echo "Starting Weather Station daemon..."' | sudo tee -a /etc/rc.local
 echo '/home/pi/weather-station/interrupt_daemon.py start' | sudo tee -a /etc/rc.local
 echo 'exit 0' | sudo tee -a /etc/rc.local
 
-## Add in correct sql credentials
-cd weather-station
-git checkout stretch
-cat <<EOT > credentials.mysql
-{
-"HOST": "localhost",
-"USERNAME": "pi",
-"PASSWORD": "$PASS1",
-"DATABASE": "weather"
-}
-EOT
-
 ## Alter crontab for periodic uploads
 crontab < crontab.save
 
-## Add credentials for weather station
-echo 'You should have registered you weather station at'
-echo 'https://apex.oracle.com/pls/apex/f?p=81290:LOGIN_DESKTOP:0:::::&tz=1:00'
-echo 'You should have a Weather Station Name'
-echo 'You should have a Weather Station Key'
-read -p "Please type in your Weather Station Name: " name < /dev/tty
-read -p "Please type in your Weather Station Key: " key < /dev/tty
-
-cat <<EOT > credentials.oracle
-{
-"WEATHER_STN_NAME": "$name",
-"WEATHER_STN_PASS": "$key"
-}
-EOT
 echo "All done - rebooting"
 sudo reboot

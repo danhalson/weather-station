@@ -55,6 +55,19 @@ class wind_direction(object):
 
         return angle
 
+    def get_dir_str(self, adc_value):
+      string = None
+
+      for dir in self.config["directions"]:
+          if (adc_value > 0 and
+          adc_value >= dir["adcmin"] and
+          adc_value <= dir["adcmax"] and
+          adc_value < self.adc.max):
+              string = dir["dir"]
+              break
+
+      return string
+
     def get_average(self, angles):
         """
         Consider the following three angles as an example: 10, 20, and 30
