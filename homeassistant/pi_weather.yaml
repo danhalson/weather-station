@@ -1,0 +1,71 @@
+# Weather Station
+- sensor:
+  - id: "ws_ambient_temp"
+    name: "Local Ambient Temp"
+    state: "{{ state_attr('sensor.weather_station', 'ambient_temp') | float }}"
+    icon: mdi:thermometer
+    unit_of_measurement: °C
+
+  - id: "ws_ground_temp"
+    name: "Local Ground Temp"
+    state: "{{ state_attr('sensor.weather_station', 'ground_temp') | float }}"
+    icon: mdi:thermometer
+    unit_of_measurement: °C
+
+  - id: "ws_wind_speed"
+    name: "Local Wind Speed"
+    state: "{{ state_attr('sensor.weather_station', 'wind_speed') | float }}"
+    icon: mdi:weather-windy
+    unit_of_measurement: mph
+
+  - id: "ws_wind_gust"
+    name: "Local Wind Gust"
+    state: "{{ state_attr('sensor.weather_station', 'wind_gust') | float }}"
+    icon: mdi:weather-windy
+    unit_of_measurement: mph
+
+  - id: "ws_air_quality"
+    name: "Local Air Quality"
+    state: "{{ state_attr('sensor.weather_station', 'air_quality') | float }}"
+    icon: mdi:weather-windy
+    unit_of_measurement: aqi
+
+  - id: "ws_rainfall"
+    name: "Local Rainfall"
+    state: "{{ state_attr('sensor.weather_station', 'rainfall') | float }}"
+    icon: mdi:water
+    unit_of_measurement: 'mm'
+
+  - id: "ws_wind_direction"
+    name: "Local Wind Direction"
+    state: "{{ state_attr('sensor.weather_station', 'wind_direction') | string }}"
+    icon: mdi:compass
+
+  - id: "ws_humidity"
+    name: "Local Humidity"
+    state: "{{ state_attr('sensor.weather_station', 'humidity') | float | round(1) }}"
+    icon: mdi:water-percent
+    unit_of_measurement: "%"
+
+  - id: "ws_pressure"
+    name: "Local Pressure"
+    state: "{{ state_attr('sensor.weather_station', 'pressure') | float }}"
+    icon: mdi:gauge
+    unit_of_measurement: "mbar"
+
+  - id: "ws_last_message"
+    name: "Last Message"
+    state: "{{ state_attr('sensor.weather_station', 'last_message') }}"
+    icon: mdi:clock
+
+  - id: "ws_cpu_temp"
+    name: "WX CPU Temp"
+    state: "{{ state_attr('sensor.weather_station', 'cpu_temp') }}"
+    icon: mdi:thermometer
+    unit_of_measurement: °C
+
+  - id: "ws_uptime"
+    name: "WX Uptime"
+    state: "{{ state_attr('sensor.weather_station', 'system_uptime') }}"
+    icon: mdi:sort-clock-descending
+    unit_of_measurement: ""
