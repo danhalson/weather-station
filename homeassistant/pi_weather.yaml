@@ -1,71 +1,71 @@
 # Weather Station
 - sensor:
   - unique_id: "ws_ambient_temp"
-    name: "Local Ambient Temp"
+    name: "WS: Ambient Temp"
     state: "{{ state_attr('sensor.weather_station', 'ambient_temp') | float }}"
     icon: mdi:thermometer
     unit_of_measurement: °C
 
   - unique_id: "ws_ground_temp"
-    name: "Local Ground Temp"
+    name: "WS: Ground Temp"
     state: "{{ state_attr('sensor.weather_station', 'ground_temp') | float }}"
     icon: mdi:thermometer
     unit_of_measurement: °C
 
   - unique_id: "ws_wind_speed"
-    name: "Local Wind Speed"
+    name: "WS: Wind Speed"
     state: "{{ state_attr('sensor.weather_station', 'wind_speed') | float }}"
     icon: mdi:weather-windy
     unit_of_measurement: mph
 
   - unique_id: "ws_wind_gust"
-    name: "Local Wind Gust"
+    name: "WS: Wind Gust"
     state: "{{ state_attr('sensor.weather_station', 'wind_gust') | float }}"
     icon: mdi:weather-windy
     unit_of_measurement: mph
 
   - unique_id: "ws_air_quality"
-    name: "Local Air Quality"
+    name: "WS: Air Quality"
     state: "{{ state_attr('sensor.weather_station', 'air_quality') | float }}"
     icon: mdi:weather-windy
     unit_of_measurement: aqi
 
   - unique_id: "ws_rainfall"
-    name: "Local Rainfall"
+    name: "WS: Rainfall"
     state: "{{ state_attr('sensor.weather_station', 'rainfall') | float }}"
     icon: mdi:water
     unit_of_measurement: 'mm'
 
   - unique_id: "ws_wind_direction"
-    name: "Local Wind Direction"
+    name: "WS: Wind Direction"
     state: "{{ state_attr('sensor.weather_station', 'wind_direction') | string }}"
     icon: mdi:compass
 
   - unique_id: "ws_humidity"
-    name: "Local Humidity"
+    name: "WS: Humidity"
     state: "{{ state_attr('sensor.weather_station', 'humidity') | float | round(1) }}"
     icon: mdi:water-percent
     unit_of_measurement: "%"
 
   - unique_id: "ws_pressure"
-    name: "Local Pressure"
+    name: "WS: Pressure"
     state: "{{ state_attr('sensor.weather_station', 'pressure') | float }}"
     icon: mdi:gauge
     unit_of_measurement: "mbar"
 
   - unique_id: "ws_last_message"
-    name: "Last Message"
+    name: "WS: Last Message"
     state: "{{ state_attr('sensor.weather_station', 'last_message') }}"
     icon: mdi:clock
 
   - unique_id: "ws_cpu_temp"
-    name: "WX CPU Temp"
+    name: "WS: CPU Temp"
     state: "{{ state_attr('sensor.weather_station', 'cpu_temp') }}"
     icon: mdi:thermometer
     unit_of_measurement: °C
 
   - unique_id: "ws_uptime"
-    name: "WX Uptime"
+    name: "WS: Uptime"
     state: "{{ state_attr('sensor.weather_station', 'system_uptime') }}"
     icon: mdi:sort-clock-descending
     unit_of_measurement: ""

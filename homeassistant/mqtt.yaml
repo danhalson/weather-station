@@ -1,0 +1,5 @@
+sensor:
+  - name: "Weather Station"
+    state_topic: "raspberry/ws/status"
+    json_attributes_topic: "raspberry/ws/sensors"
+    unique_id: "weather_station"
